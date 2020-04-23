@@ -1,5 +1,39 @@
-console.log('running react');
+'use strict';
 
-const template = React.createElement('p', null, 'This is react text');
+console.log('react is running now! ');
+var template = React.createElement(
+  'div',
+  null,
+  React.createElement(
+    'h1',
+    null,
+    'Indecision App'
+  ),
+  React.createElement(
+    'p',
+    null,
+    'This is descriptions'
+  )
+);
 
-ReactDOM.render(template, document.querySelector('#app'));
+var templateTwo = React.createElement(
+  'div',
+  null,
+  React.createElement(
+    'h1',
+    null,
+    'Shiviraj'
+  ),
+  React.createElement(
+    'p',
+    null,
+    'Age: 22'
+  ),
+  React.createElement(
+    'p',
+    null,
+    'Location: India'
+  )
+);
+
+ReactDOM.render(templateTwo, document.querySelector('#app'));
