@@ -1,20 +1,25 @@
 'use strict';
 
 console.log('react is running now! ');
+
+var app = { title: 'React', subtitle: 'Learning React' };
+
 var template = React.createElement(
   'div',
   null,
   React.createElement(
     'h1',
     null,
-    'Indecision App'
+    app.title
   ),
   React.createElement(
     'p',
     null,
-    'This is descriptions'
+    app.subtitle
   )
 );
+
+var user = { name: 'Shivi', age: 22, location: 'India' };
 
 var templateTwo = React.createElement(
   'div',
@@ -22,17 +27,19 @@ var templateTwo = React.createElement(
   React.createElement(
     'h1',
     null,
-    'Shiviraj'
+    user.name
   ),
-  React.createElement(
+  user.age > 17 && React.createElement(
     'p',
     null,
-    'Age: 22'
+    'Age: ',
+    user.age
   ),
-  React.createElement(
+  user.location && React.createElement(
     'p',
     null,
-    'Location: India'
+    'Location: ',
+    user.location
   )
 );
 
