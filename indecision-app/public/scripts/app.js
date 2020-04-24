@@ -1,46 +1,33 @@
 'use strict';
 
-console.log('react is running now! ');
+var visibility = true;
 
-var app = { title: 'React', subtitle: 'Learning React' };
+var toggleDetails = function toggleDetails() {
+  visibility = !visibility;
+  render();
+};
 
-var template = React.createElement(
-  'div',
-  null,
-  React.createElement(
-    'h1',
+var render = function render() {
+  var templateTwo = React.createElement(
+    'div',
     null,
-    app.title
-  ),
-  React.createElement(
-    'p',
-    null,
-    app.subtitle
-  )
-);
+    React.createElement(
+      'h1',
+      null,
+      'Toggle Visible'
+    ),
+    React.createElement(
+      'button',
+      { onClick: toggleDetails },
+      visibility ? 'hide details' : 'show details'
+    ),
+    visibility && React.createElement(
+      'p',
+      null,
+      'This is some text!'
+    )
+  );
+  ReactDOM.render(templateTwo, document.querySelector('#app'));
+};
 
-var user = { name: 'Shivi', age: 22, location: 'India' };
-
-var templateTwo = React.createElement(
-  'div',
-  null,
-  React.createElement(
-    'h1',
-    null,
-    user.name
-  ),
-  user.age > 17 && React.createElement(
-    'p',
-    null,
-    'Age: ',
-    user.age
-  ),
-  user.location && React.createElement(
-    'p',
-    null,
-    'Location: ',
-    user.location
-  )
-);
-
-ReactDOM.render(templateTwo, document.querySelector('#app'));
+render();

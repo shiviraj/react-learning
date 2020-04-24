@@ -1,22 +1,47 @@
 console.log('react is running now! ');
 
-const app = {title: 'React', subtitle: 'Learning React'};
+const app = {
+  title: 'React App',
+  subtitle: 'learning react js',
+  options: [],
+};
 
-var template = (
-  <div>
-    <h1>{app.title}</h1>
-    <p>{app.subtitle}</p>
-  </div>
-);
+const onFormSubmit = function (e) {
+  e.preventDefault();
+  const option = e.target.option.value;
+  if (option) {
+    app.options.push(option);
+    e.target.option.value = '';
+    renderApp();
+  }
+};
 
-const user = {name: 'Shivi', age: 22, location: 'India'};
+const removeAll = function () {
+  app.options = [];
+  renderApp();
+};
 
-var templateTwo = (
-  <div>
-    <h1>{user.name}</h1>
-    {user.age > 17 && <p>Age: {user.age}</p>}
-    {user.location && <p>Location: {user.location}</p>}
-  </div>
-);
+const renderApp = () => {
+  const templateTwo = (
+    <div>
+      <h1>{app.title}</h1>
+      {app.subtitle && <h3>{app.subtitle}</h3>}
+      <form onSubmit={onFormSubmit}>
+        <input name="option" />
+        <button>Add Option</button>
+      </form>
+      <button onClick={removeAll}>Remove All</button>
 
-ReactDOM.render(templateTwo, document.querySelector('#app'));
+      <p>{app.options.length > 0 ? 'Here are your options' : 'No options'}</p>
+      <p>{app.options.length}</p>
+      <ol>
+        {app.options.map((option, idx) => {
+          return <li key={idx}>{option}</li>;
+        })}
+      </ol>
+    </div>
+  );
+  ReactDOM.render(templateTwo, document.querySelector('#app'));
+};
+
+renderApp();
