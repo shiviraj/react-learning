@@ -1,47 +1,58 @@
-console.log('react is running now! ');
-
-const app = {
-  title: 'React App',
-  subtitle: 'learning react js',
-  options: [],
-};
-
-const onFormSubmit = function (e) {
-  e.preventDefault();
-  const option = e.target.option.value;
-  if (option) {
-    app.options.push(option);
-    e.target.option.value = '';
-    renderApp();
+class IndecisionApp extends React.Component {
+  render() {
+    return (
+      <div>
+        <Header />
+        <Action />
+        <Options />
+        <AddOption />
+      </div>
+    );
   }
-};
+}
 
-const removeAll = function () {
-  app.options = [];
-  renderApp();
-};
+class Header extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1>Indecision</h1>
+        <h2>Put your life in the hands of a computer</h2>
+      </div>
+    );
+  }
+}
 
-const renderApp = () => {
-  const templateTwo = (
-    <div>
-      <h1>{app.title}</h1>
-      {app.subtitle && <h3>{app.subtitle}</h3>}
-      <form onSubmit={onFormSubmit}>
-        <input name="option" />
-        <button>Add Option</button>
-      </form>
-      <button onClick={removeAll}>Remove All</button>
+class Action extends React.Component {
+  render() {
+    return (
+      <div>
+        <button>What should I do?</button>
+      </div>
+    );
+  }
+}
 
-      <p>{app.options.length > 0 ? 'Here are your options' : 'No options'}</p>
-      <p>{app.options.length}</p>
-      <ol>
-        {app.options.map((option, idx) => {
-          return <li key={idx}>{option}</li>;
-        })}
-      </ol>
-    </div>
-  );
-  ReactDOM.render(templateTwo, document.querySelector('#app'));
-};
+class Option extends React.Component {
+  render() {
+    return <p>Your Option</p>;
+  }
+}
 
-renderApp();
+class Options extends React.Component {
+  render() {
+    return (
+      <div>
+        Options component here
+        <Option />
+      </div>
+    );
+  }
+}
+
+class AddOption extends React.Component {
+  render() {
+    return <div>AddOption component here</div>;
+  }
+}
+
+ReactDOM.render(<IndecisionApp />, document.getElementById('app'));
