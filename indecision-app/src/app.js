@@ -5,7 +5,25 @@ class IndecisionApp extends React.Component {
     this.handlePick = this.handlePick.bind(this);
     this.handleAddOption = this.handleAddOption.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
-    this.state = {options: props.options};
+    this.state = {options: []};
+  }
+  componentDidMount() {
+    try {
+      const json = localStorage.getItem('options');
+      const options = JSON.parse(json);
+
+      if (options) {
+        this.setState(() => ({options}));
+      }
+    } catch (e) {
+      // Do nothing at all
+    }
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.options.length !== this.state.options.length) {
+      const json = JSON.stringify(this.state.options);
+      localStorage.setItem('options', json);
+    }
   }
   handleRemoveAll() {
     this.setState(() => ({options: []}));
@@ -46,8 +64,6 @@ class IndecisionApp extends React.Component {
   }
 }
 
-IndecisionApp.defaultProps = {options: []};
-
 const Header = function (props) {
   return (
     <div>
@@ -79,7 +95,7 @@ const Options = function (props) {
     <div>
       <button
         onClick={props.handleRemoveAll}
-        disable={!props.options.length > 0}
+        disabled={!props.options.length > 0}
       >
         Remove All
       </button>
