@@ -19,6 +19,7 @@ var IndecisionApp = function (_React$Component) {
     _this.handleRemoveAll = _this.handleRemoveAll.bind(_this);
     _this.handlePick = _this.handlePick.bind(_this);
     _this.handleAddOption = _this.handleAddOption.bind(_this);
+    _this.handleRemove = _this.handleRemove.bind(_this);
     _this.state = { options: props.options };
     return _this;
   }
@@ -28,6 +29,17 @@ var IndecisionApp = function (_React$Component) {
     value: function handleRemoveAll() {
       this.setState(function () {
         return { options: [] };
+      });
+    }
+  }, {
+    key: 'handleRemove',
+    value: function handleRemove(optionToRemove) {
+      this.setState(function (prevState) {
+        return {
+          options: prevState.options.filter(function (option) {
+            return optionToRemove !== option;
+          })
+        };
       });
     }
   }, {
@@ -60,7 +72,8 @@ var IndecisionApp = function (_React$Component) {
         }),
         React.createElement(Options, {
           options: this.state.options,
-          handleRemoveAll: this.handleRemoveAll
+          handleRemoveAll: this.handleRemoveAll,
+          handleRemove: this.handleRemove
         }),
         React.createElement(AddOption, { handleAddOption: this.handleAddOption })
       );
@@ -106,7 +119,14 @@ var Option = function Option(props) {
     'div',
     null,
     'Option : ',
-    props.text
+    props.text,
+    React.createElement(
+      'button',
+      { onClick: function onClick(e) {
+          return props.handleRemove(props.text);
+        } },
+      'Remove'
+    )
   );
 };
 
@@ -123,7 +143,7 @@ var Options = function Options(props) {
       'Remove All'
     ),
     props.options.map(function (option) {
-      return React.createElement(Option, { key: option, text: option });
+      return React.createElement(Option, { key: option, text: option, handleRemove: props.handleRemove });
     })
   );
 };
