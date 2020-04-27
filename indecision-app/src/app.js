@@ -4,7 +4,7 @@ class IndecisionApp extends React.Component {
     this.handleRemoveAll = this.handleRemoveAll.bind(this);
     this.handlePick = this.handlePick.bind(this);
     this.handleAddOption = this.handleAddOption.bind(this);
-    this.state = {options: []};
+    this.state = {options: props.options};
   }
   handleRemoveAll() {
     this.setState(() => {
@@ -42,6 +42,8 @@ class IndecisionApp extends React.Component {
     );
   }
 }
+
+IndecisionApp.defaultProps = {options: []};
 
 const Header = function (props) {
   return (
