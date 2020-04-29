@@ -5,6 +5,7 @@ const Options = function (props) {
   return (
     <div>
       <button
+        className="button button--link"
         onClick={props.handleRemoveAll}
         disabled={!props.options.length > 0}
       >
